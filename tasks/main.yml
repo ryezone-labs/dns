@@ -29,4 +29,4 @@
   become: yes
 
 - name: Disable systemd resolved
-  include_tasks: disable_sysgtemd_resolved.yml
+  include_tasks: disable_systemd_resolved.yml

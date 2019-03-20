@@ -5,9 +5,11 @@
     state: stopped
     enabled: false
   when: dns_systemd_resolved.disabled
+  become: yes
 
 - name: Overwrite /etc/resolv.conf
   template:
     src: resolv.conf.j2
     dest: /etc/resolv.conf
   when: dns_systemd_resolved.disabled
+  become: yes
