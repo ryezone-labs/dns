@@ -13,11 +13,11 @@
   notify: Restart bind9
   become: yes
 
-- name: "Apply db.{{item.name}} configuration."
+- name: "Apply db.{{ item.name }} configuration."
   template:
     src: db.zone.j2
-    dest: "/etc/bind/db.{{item.name}}"
-  with_items: "{{dns_bind.zones}}"
+    dest: "/etc/bind/db.{{ item.name }}"
+  with_items: "{{ dns_bind.zones }}"
   notify: Restart bind9
   become: yes
 

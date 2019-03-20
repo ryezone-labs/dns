@@ -5,4 +5,3 @@
     name: bind9
     state: restarted
   become: yes
-
