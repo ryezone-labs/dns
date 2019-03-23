@@ -23,49 +23,47 @@ ryezone_labs_lanAddress: 10.100.10.1
 ### Configure systemd resolved
 
 ```yaml
-dns_systemd_resolved:
-  disabled: true
-  nameservers: "{{ ryezone_labs_external_dns }}"
-  search_zones: 
-    - "{{ ryezone_labs_top_level_domain }}"
+dns_systemd_resolved_disabled: true
+dns_systemd_resolved_nameservers: "{{ ryezone_labs_external_dns }}"
+dns_systemd_resolved_search_zones: 
+  - "{{ ryezone_labs_top_level_domain }}"
 ```
 
-- `disabled` (bool) 
+- `dns_systemd_resolved_disabled` (bool) 
 
   When `true` resolved is disabled.
 
-- `nameservers` (list of string) 
+- `dns_systemd_resolved_nameservers` (list of string) 
 
   List of nameservers used by resolved.
 
-- `search_zones` (list of string) 
+- `dns_systemd_resolved_search_zones` (list of string) 
 
   List of default search zones to use in resolution when a partial hostname is provided.
 
 ### Configure bind
 
 ```yaml
-dns_bind:
-  forwarders: "{{ ryezone_labs_external_dns }}"
-  listen_on_v6:
-    - none
-  listen_on_v4:
-    - 127.0.0.1
-    - "{{ ryezone_labs_lanAddress }}"
-  zones:
-    - name: "{{ ryezone_labs_top_level_domain }}"
-      TTL: 604800
-      serial: 5
-      refresh: 604800
-      retry: 86400
-      expire: 2419200
-      negative_cache_ttl: 604800
-      nameserver: "router.{{ ryezone_labs_top_level_domain }}"
-      records:
-        - name: router
-          class: IN
-          type: A
-          target: "{{ ryezone_labs_lanAddress }}"
+dns_bind_forwarders: "{{ ryezone_labs_external_dns }}"
+dns_bind_listen_on_v6:
+  - none
+dns_bind_listen_on_v4:
+  - 127.0.0.1
+  - "{{ ryezone_labs_lanAddress }}"
+dns_bind_zones:
+  - name: "{{ ryezone_labs_top_level_domain }}"
+    TTL: 604800
+    serial: 5
+    refresh: 604800
+    retry: 86400
+    expire: 2419200
+    negative_cache_ttl: 604800
+    nameserver: "router.{{ ryezone_labs_top_level_domain }}"
+    records:
+      - name: router
+        class: IN
+        type: A
+        target: "{{ ryezone_labs_lanAddress }}"
 ```
 
 - `forwarders` (list of string) 

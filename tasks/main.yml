@@ -17,7 +17,7 @@
   template:
     src: db.zone.j2
     dest: "/etc/bind/db.{{ item.name }}"
-  with_items: "{{ dns_bind.zones }}"
+  with_items: "{{ dns_bind_zones }}"
   notify: Restart bind9
   become: yes
 

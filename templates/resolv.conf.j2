@@ -15,7 +15,7 @@
 # See man:systemd-resolved.service(8) for details about the supported modes of
 # operation for /etc/resolv.conf.
 
-{% for ns in dns_systemd_resolved.nameservers %}
-nameserver {{ns}}
+{% for ns in dns_systemd_resolved_nameservers %}
+nameserver {{ ns }}
 {% endfor %}
-search {% for zone in dns_systemd_resolved.search_zones %}{{zone}} {% endfor %}
+search {% for zone in dns_systemd_resolved_search_zones %}{{ zone }} {% endfor %}
