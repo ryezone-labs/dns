@@ -1,0 +1,29 @@
+---
+# tasks file for dns
+- name: Install bind9
+  package:
+    name: bind9
+    state: present
+  become: yes
+
+- name: Apply named.conf.options configuration.
+  template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify: Restart bind9
+  become: yes
+
+- name: "Apply db.{{ item.name }} configuration."
+  template:
+    src: db.zone.j2
+    dest: "/etc/bind/db.{{ item.name }}"
+  with_items: "{{ dns_bind_zones }}"
+  notify: Restart bind9
+  become: yes
+
+- name: Apply named.conf.local configuration.
+  template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify: Restart bind9
+  become: yes

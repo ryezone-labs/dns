@@ -5,9 +5,11 @@ ryezone_labs_external_dns:
   - 1.0.0.1
 ryezone_labs_top_level_domain: domain.local
 ryezone_labs_lanAddress: 10.100.10.1
+ryezone_labs_internal_dns: 10.100.10.1
 
+dns_daemon_enabled: false
 dns_systemd_resolved_disabled: true
-dns_systemd_resolved_nameservers: "{{ ryezone_labs_external_dns }}"
+dns_systemd_resolved_nameservers: "{{ ryezone_labs_internal_dns }}"
 dns_systemd_resolved_search_zones: 
     - "{{ ryezone_labs_top_level_domain }}"
 
